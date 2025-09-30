@@ -11,6 +11,9 @@ importers:
       '@inkeep/cxkit-react-oss':
         specifier: ^0.5.105
         version: 0.5.105(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       next:
         specifier: 15.5.4
         version: 15.5.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -20,9 +23,6 @@ importers:
       react-dom:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
-      zod:
-        specifier: ^3.24.1
-        version: 3.25.76
       zustand:
         specifier: ^5.0.8
         version: 5.0.8(@types/react@19.1.15)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
@@ -3169,9 +3169,6 @@ packages:
     resolution: {integrity: sha512-h/z3PKvcTcTetyjl1fkj79MHNEjm+HpD6NXheWjzOekY7kV+lwDYnHw+ivHkijnCSMz1yJaWBD9vu/Fcmk+vEg==}
     peerDependencies:
       zod: ^3.24.1
-
-  zod@3.25.76:
-    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
   zod@4.1.11:
     resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
@@ -6813,8 +6810,6 @@ snapshots:
   zod-to-json-schema@3.24.6(zod@4.1.11):
     dependencies:
       zod: 4.1.11
-
-  zod@3.25.76: {}
 
   zod@4.1.11: {}
 

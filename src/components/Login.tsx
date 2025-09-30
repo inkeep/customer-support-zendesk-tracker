@@ -3,18 +3,25 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/store/useUser'
+import Button from './Button'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { setUser, name: currentName, email: currentEmail, clear } = useUser()
   
   const isLoggedIn = Boolean(currentName && currentEmail)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (email.trim() && password.trim()) {
+      setIsLoading(true)
+      
+      // Simulate a brief loading state for better UX
+      await new Promise(resolve => setTimeout(resolve, 800))
+      
       // Parse name from email (part before @) and format it
       const parsedName = email.split('@')[0]
       const formattedName = parsedName.charAt(0).toUpperCase() + parsedName.slice(1).toLowerCase()
@@ -26,69 +33,65 @@ export default function Login() {
 
   if (isLoggedIn) {
     return (
-      <div className="max-w-md mx-auto p-8 rounded-xl shadow-lg" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-primary-lighter)' }}>
-        <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--color-foreground)' }}>Welcome!</h2>
-        <p className="mb-4" style={{ color: 'var(--color-muted)' }}>
-          Logged in as: <span className="font-semibold">{currentName}</span>
+      <div className="card animate-fade-in-scale max-w-md mx-auto p-8">
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold font-neue-haas" style={{ color: 'var(--color-foreground)' }}>Welcome!</h2>
+        </div>
+        <p className="mb-6 font-neue-haas text-center" style={{ color: 'var(--color-muted)' }}>
+          Logged in as: <span className="font-semibold text-primary">{currentName}</span>
         </p>
-        <button
+        <Button
+          variant="secondary"
           onClick={() => {
             clear()
             router.push('/')
           }}
-          className="w-full text-white py-2 px-4 rounded-md transition-colors font-medium"
-          style={{
-            background: 'var(--color-muted)',
-            border: '1px solid var(--color-muted)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'var(--color-primary-text)';
-            e.currentTarget.style.borderColor = 'var(--color-primary-text)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'var(--color-muted)';
-            e.currentTarget.style.borderColor = 'var(--color-muted)';
-          }}
+          className="w-full"
         >
           Logout
-        </button>
+        </Button>
       </div>
     )
   }
 
   return (
-    <div className="max-w-md mx-auto p-8 rounded-xl shadow-lg" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-primary-lighter)' }}>
-      <h2 className="text-2xl font-bold mb-8" style={{ color: 'var(--color-foreground)' }}>Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1" style={{ color: 'var(--color-foreground)' }}>
-            Email
+    <div className="card animate-fade-in-scale max-w-md mx-auto p-8">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <h2 className="text-2xl font-bold font-neue-haas" style={{ color: 'var(--color-foreground)' }}>Welcome Back</h2>
+        <p className="text-sm mt-2 font-neue-haas" style={{ color: 'var(--color-muted)' }}>
+          Sign in to access your personalized AI assistant
+        </p>
+      </div>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="form-group">
+          <label htmlFor="email" className="form-label">
+            Email Address
           </label>
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
-            style={{
-              borderColor: 'var(--color-primary-lighter)',
-              background: 'var(--color-surface-alt)',
-              color: 'var(--color-foreground)'
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = 'var(--color-primary)';
-              e.currentTarget.style.boxShadow = '0 0 0 2px rgba(55, 132, 255, 0.1)';
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = 'var(--color-primary-lighter)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-            placeholder="Enter your email"
+            className="form-input w-full"
+            placeholder="Enter your email address"
             required
+            disabled={isLoading}
           />
         </div>
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-1" style={{ color: 'var(--color-foreground)' }}>
+        
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
           <input
@@ -96,43 +99,35 @@ export default function Login() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
-            style={{
-              borderColor: 'var(--color-primary-lighter)',
-              background: 'var(--color-surface-alt)',
-              color: 'var(--color-foreground)'
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = 'var(--color-primary)';
-              e.currentTarget.style.boxShadow = '0 0 0 2px rgba(55, 132, 255, 0.1)';
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = 'var(--color-primary-lighter)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            className="form-input w-full"
             placeholder="Enter your password"
             required
+            disabled={isLoading}
           />
         </div>
-        <button
+        
+        <Button
           type="submit"
-          className="w-full text-white py-2 px-4 rounded-md transition-colors font-medium"
-          style={{
-            background: 'var(--color-primary)',
-            border: '1px solid var(--color-primary)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'var(--color-primary-dark)';
-            e.currentTarget.style.borderColor = 'var(--color-primary-dark)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'var(--color-primary)';
-            e.currentTarget.style.borderColor = 'var(--color-primary)';
-          }}
+          variant="primary"
+          className="w-full"
+          disabled={isLoading}
         >
-          Login
-        </button>
+          {isLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              <div className="loading-spinner w-4 h-4"></div>
+              <span>Signing in...</span>
+            </div>
+          ) : (
+            'Sign In'
+          )}
+        </Button>
       </form>
+      
+      <div className="mt-6 text-center">
+        <p className="text-xs font-neue-haas" style={{ color: 'var(--color-muted)' }}>
+          Demo: Use your email and password to sign in
+        </p>
+      </div>
     </div>
   )
 }

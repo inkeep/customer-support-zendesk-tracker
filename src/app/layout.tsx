@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import {
+  geistMono,
+  geistSans,
+  jetBrainsMono,
+  neueHaasGroteskDisplayPro,
+  notoSerif,
+} from "@/styles/fonts";
+import PageBackground from "@/components/PageBackground";
+import Header from "@/components/Header";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-
 export const metadata: Metadata = {
-  title: "Customer Support Demo",
-  description: "Inkeep AI Chat Integration with Zendesk Tracker",
+  title: "Customer Support Demo - Inkeep",
+  description: "Inkeep AI Chat Integration with Zendesk Tracker - Experience the future of AI-powered customer support",
 };
 
 export default function RootLayout({
@@ -21,9 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable}
+         ${notoSerif.variable} ${jetBrainsMono.variable} ${neueHaasGroteskDisplayPro.variable} antialiased`}
       >
-        {children}
+        <div className="fixed inset-0 -z-10">
+          <PageBackground />
+        </div>
+        <Header />
+        <main className="relative z-10">
+          {children}
+        </main>
       </body>
     </html>
   );

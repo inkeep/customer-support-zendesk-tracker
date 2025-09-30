@@ -34,6 +34,24 @@ export default function InkeepChat() {
     }
   }, [hasHydrated, isLoggedIn, name, email, isInitialized])
 
+  // Force z-index on Inkeep elements
+  useEffect(() => {
+    const forceZIndex = () => {
+      const inkeepElements = document.querySelectorAll('[data-inkeep-sidebar-chat], .ikp-sidebar, .inkeep-sidebar')
+      inkeepElements.forEach((element) => {
+        const htmlElement = element as HTMLElement
+        htmlElement.style.zIndex = '999999'
+        htmlElement.style.position = 'fixed'
+      })
+    }
+
+    // Run immediately and on interval to catch dynamically created elements
+    forceZIndex()
+    const interval = setInterval(forceZIndex, 100)
+
+    return () => clearInterval(interval)
+  }, [isOpen])
+
   // Prepare headers for the agent request context
   // IMPORTANT: keys are lowercase (see Request Context docs).
   const aiChatSettings = useMemo<InkeepSidebarChatProps["aiChatSettings"]>(() => {
@@ -113,14 +131,19 @@ export default function InkeepChat() {
 
   return (
     <>
-      {/* Ask AI button */}
+      {/* Ask AI button - matching marketing-site styling */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 px-4 py-3 rounded-full transition-all duration-300 z-50 flex items-center gap-2 font-medium border-2 ${
+        className={`fixed bottom-6 right-6 px-4 py-3 rounded-full transition-all duration-200 z-[99998] flex items-center gap-2 font-medium border font-jet-brains backdrop-blur-[10px] ${
           isOpen 
-            ? "bg-gray-500 hover:bg-gray-600 text-white border-gray-500" 
-            : "bg-blue-100 hover:bg-blue-200 text-blue-900 border-blue-300 hover:scale-105"
+            ? "bg-primary-dark hover:bg-primary text-white border-primary-dark" 
+            : "bg-primary-lighter hover:bg-primary-light text-primary-text border-primary-light"
         }`}
+        style={{
+          boxShadow: isOpen 
+            ? "6px 8px 22px rgba(157, 194, 255, 0.24), 0 10px 36px rgba(0, 0, 0, 0.10)"
+            : "5px 6px 18px rgba(157, 194, 255, 0.20), 0 8px 32px rgba(0, 0, 0, 0.08)"
+        }}
         aria-label={isOpen ? "Close chat" : "Ask AI"}
       >
         {isOpen ? (
@@ -140,10 +163,18 @@ export default function InkeepChat() {
         )}
       </button>
 
-      {/* The chat sidebar wrapper */}
-      <div className={`fixed right-0 top-0 w-[450px] h-screen z-[9999] max-w-[85vw] ${
+      {/* The chat sidebar wrapper - positioned at right edge and over everything */}
+      <div className={`fixed right-0 top-0 w-[450px] h-screen max-w-[85vw] ${
         isOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible'
-      }`}>
+      }`} style={{ 
+        zIndex: 999999,
+        position: 'fixed',
+        right: 0,
+        top: 0,
+        width: '450px',
+        height: '100vh',
+        maxWidth: '85vw'
+      }}>
         {aiChatSettings && (
             <InkeepSidebarChat
               baseSettings={{
