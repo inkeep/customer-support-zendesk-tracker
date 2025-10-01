@@ -7,6 +7,8 @@ import {
   InkeepEmbeddedChat,
   type InkeepEmbeddedChatProps,
 } from '@inkeep/cxkit-react-oss'
+import OrderTrackingDisplay from './OrderTrackingDisplay'
+import SupportTicketCard from './SupportTicketCard'
 
 const styleOverrides = `
 .ikp-ai-chat-wrapper{
@@ -172,6 +174,12 @@ export default function InkeepChat() {
       placeholder: "Ask me anything about your order...",
       introMessage: `Hi ${name}! 👋 I'm here to help you with any questions about your orders, returns, or our services. Your session is now connected and personalized. What can I help you with today?`,
 
+      // Data components registration
+      components: {
+        OrderTrackingDisplay,
+        SupportTicketCard
+      },
+
       // Help options for better UX
       getHelpOptions: [
         {
@@ -273,7 +281,6 @@ export default function InkeepChat() {
               },
             }}
             aiChatSettings={aiChatSettings}
-
           />
         </div>
       </div>
