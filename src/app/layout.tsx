@@ -30,7 +30,7 @@ export default function RootLayout({
           <PageBackground />
         </div>
         <Header />
-        <main className="relative z-10">
+        <main className="relative">
           {children}
         </main>
       </body>
