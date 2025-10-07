@@ -251,7 +251,7 @@ export default function InkeepChat() {
         )}
       </button>
 
-      <div className={`fixed bottom-[80px] right-5 height-full z-20 h-full w-[450px] shadow-2xl rounded-md transition-opacity duration-300 translate-y-0 max-h-[min(540px,calc(100%-80px))] ${isOpen ? 'opacity-100' : 'opacity-0  pointer-events-none'}`}>
+      <div className={`fixed bottom-[80px] right-5 height-full z-20 h-full w-[550px] shadow-2xl rounded-md transition-opacity duration-300 translate-y-0 max-h-[min(700px,calc(100%-80px))] ${isOpen ? 'opacity-100' : 'opacity-0  pointer-events-none'}`}>
         <div className="flex justify-between items-center py-2 pr-4 pl-5 bg-white text-gray-500 relative text-sm rounded-t-md after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-3 after:translate-y-full after:transform after:bg-gradient-to-b after:from-white after:to-transparent after:z-[1] after:pointer-events-none
  ">
           <div>Ask AI</div>
