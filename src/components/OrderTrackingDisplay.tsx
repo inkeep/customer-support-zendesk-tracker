@@ -11,9 +11,10 @@ interface OrderTrackingDisplayProps {
     primaryAddress: string
     lastUpdated: string
   }
+  submitMessage: (message: string) => void
 }
 
-export default function OrderTrackingDisplay({ order }: OrderTrackingDisplayProps) {
+export default function OrderTrackingDisplay({ order, submitMessage }: OrderTrackingDisplayProps) {
   // Debug logging to verify component is being called
   console.log('🎯 OrderTrackingDisplay rendered with order:', order)
 
@@ -49,7 +50,7 @@ export default function OrderTrackingDisplay({ order }: OrderTrackingDisplayProp
 
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm max-w-md mx-auto my-2">
+    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm max-w-md mx-auto my-2" onClick={() => submitMessage(`${order.id}`)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2 flex-1">
