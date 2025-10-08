@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useRef, useMemo, useEffect } from 'react'
 import { Sparkle, X } from 'lucide-react'
 import { useUser } from '@/store/useUser'
 import {
   InkeepEmbeddedChat,
   type InkeepEmbeddedChatProps,
 } from '@inkeep/cxkit-react-oss'
+import type { AIChatFunctions } from '@inkeep/cxkit-react-oss/types'
 import OrderTrackingDisplay from './OrderTrackingDisplay'
 import SupportTicketCard from './SupportTicketCard'
 
@@ -122,6 +123,7 @@ export default function InkeepChat() {
   const [isInitialized, setIsInitialized] = useState(false)
   const [sessionId, setSessionId] = useState<string>('')
   const { name, email, hasHydrated } = useUser()
+  const chatFunctionsRef = useRef<AIChatFunctions | null>(null);
 
   // Check if user is logged in
   const isLoggedIn = Boolean(name && email)
@@ -138,6 +140,12 @@ export default function InkeepChat() {
       setSessionId('')
     }
   }, [hasHydrated, isLoggedIn, name, email, isInitialized])
+
+
+  const submitMessage = (message: string) => {
+    chatFunctionsRef.current?.submitMessage(message);
+  };
+
 
   // Prepare headers for the agent request context
   // IMPORTANT: keys are lowercase (see Request Context docs).
@@ -164,6 +172,7 @@ export default function InkeepChat() {
 
     return {
       graphUrl,
+      chatFunctions: chatFunctionsRef.current,
       headers,
       // Example questions (better than quickQuestions)
       exampleQuestions: [
@@ -176,7 +185,7 @@ export default function InkeepChat() {
 
       // Data components registration
       components: {
-        OrderTrackingDisplay,
+        OrderTrackingDisplay: (props: any) => <OrderTrackingDisplay submitMessage={submitMessage} {...props} />,
         SupportTicketCard
       },
 
