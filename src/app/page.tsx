@@ -9,7 +9,7 @@ import Footer from '@/components/Footer'
 export default function Home() {
   const { name, email, hasHydrated } = useUser()
   const router = useRouter()
-  
+
   const isLoggedIn = Boolean(name && email)
 
   // Redirect to dashboard if already logged in (after hydration)
@@ -47,23 +47,23 @@ export default function Home() {
     <div className="min-h-screen pt-8 pb-12">
       <div className="w-full">
         {/* Hero Section */}
-        <header className="text-center mb-8 animate-fade-in-up">
+        <header className="text-center mb-8 animate-fade-in-up font-neue-haas">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-8 font-neue-haas bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
-              Customer Support Demo
+            <h1 className="text-primary-text text-5xl lg:text-[80px] font-normal lg:leading-[109%] lg:tracking-[-1.6px]">
+              Customer support demo
             </h1>
             <p className="text-xl md:text-2xl font-neue-haas mb-12" style={{ color: 'var(--color-muted)' }}>
               Experience the future of AI-powered customer support
             </p>
           </div>
         </header>
-        
+
         <main className="max-w-6xl mx-auto">
           {/* Login Section */}
           <div className="mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <Login />
           </div>
-          
+
           {/* Features Section */}
           <div className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             <h2 className="text-3xl font-bold mb-4 font-neue-haas" style={{ color: 'var(--color-foreground)' }}>
@@ -72,7 +72,7 @@ export default function Home() {
             <p className="text-lg mb-12 font-neue-haas" style={{ color: 'var(--color-muted)' }}>
               A personalized AI assistant that understands your context and provides intelligent support
             </p>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Feature Card 1 */}
               <div className="card p-8 text-left group">

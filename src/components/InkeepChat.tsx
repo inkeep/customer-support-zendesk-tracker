@@ -6,7 +6,7 @@ import { useUser } from '@/store/useUser'
 import {
   InkeepEmbeddedChat,
   type InkeepEmbeddedChatProps,
-} from '@inkeep/cxkit-react-oss'
+} from '@inkeep/agents-ui'
 import OrderTrackingDisplay from './OrderTrackingDisplay'
 import SupportTicketCard from './SupportTicketCard'
 
@@ -112,10 +112,10 @@ const styleOverrides = `
 }
   `
 
-const graphUrl = process.env.NEXT_PUBLIC_INKEEP_GRAPH_URL || 'http://localhost:3003/api/chat'
+const agentUrl = process.env.NEXT_PUBLIC_INKEEP_GRAPH_URL || 'http://localhost:3003/api/chat'
 const tenantId = process.env.NEXT_PUBLIC_INKEEP_TENANT_ID || 'inkeep'
 const projectId = process.env.NEXT_PUBLIC_INKEEP_PROJECT_ID || 'default'
-const graphId = process.env.NEXT_PUBLIC_INKEEP_GRAPH_ID || 'your-graph-id'
+const agentId = process.env.NEXT_PUBLIC_INKEEP_GRAPH_ID || 'your-graph-id'
 
 export default function InkeepChat() {
   const [isOpen, setIsOpen] = useState(false)
@@ -150,7 +150,8 @@ export default function InkeepChat() {
     const headers = {
       "x-inkeep-tenant-id": tenantId,
       "x-inkeep-project-id": projectId,
-      "x-inkeep-graph-id": graphId,
+      "x-inkeep-agent-id": agentId,
+      'x-emit-operations': 'true',
 
       // Request context headers for personalization
       // These will be available in your graph as requestContext.user_name and requestContext.user_email
@@ -163,7 +164,7 @@ export default function InkeepChat() {
     };
 
     return {
-      graphUrl,
+      agentUrl,
       headers,
       // Example questions (better than quickQuestions)
       exampleQuestions: [

@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@inkeep/cxkit-react-oss':
-        specifier: ^0.5.105
-        version: 0.5.105(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@inkeep/agents-ui':
+        specifier: ^0.14.14
+        version: 0.14.14(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -323,8 +323,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inkeep/cxkit-react-oss@0.5.105':
-    resolution: {integrity: sha512-NsvSmpdVdiHi/ihWnwXzl604ITGP7RYJhKekJ7vLs+g/BAo9sYJphjZIlu55TS75rEe4oqnwI4s56AcxTLYnRg==}
+  '@inkeep/agents-ui@0.14.14':
+    resolution: {integrity: sha512-ST9e62GOTUHru5iPMRJrM9IK+HquUEtolTezLMtqn48mBAxK+nia45qmwGtG4SOMHU/K7Gq43qzV3at2jS69Rw==}
 
   '@isaacs/fs-minipass@4.0.1':
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
@@ -1383,6 +1383,9 @@ packages:
   '@zag-js/dom-query@1.24.2':
     resolution: {integrity: sha512-CrjxXni9S9sxuz64uveHDGsvXcZPuN8ydg5+UFZh0MTXCCpS2nFdSWJ1ZN4uyak+X0CdyIEvvbzdxmEhBi33dQ==}
 
+  '@zag-js/dom-query@1.26.2':
+    resolution: {integrity: sha512-RWi/gS+Km3gPn9KDEKMOnj+Y74klVaNLEhRbkwa1BG5kUMdBMDBAMVmGMnE05q1hWBIiIfaKuTsgZTgggwkdsQ==}
+
   '@zag-js/focus-trap@1.24.2':
     resolution: {integrity: sha512-ztqxOaB7Z8zOZH4HvHnMpKREhrTAcJICRmHgwx1Dfq5SqymlMBnFD0zwS/F0mlbZqzz9eV9yYLAd1Xy54OdeGw==}
 
@@ -1395,11 +1398,17 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
+  '@zag-js/remove-scroll@1.26.2':
+    resolution: {integrity: sha512-QKwFQjS/CUaLaTzzr822OMxs3YX+1QcoH5AqxaUIBc7Y2ag/el/G8S3wFHXrNVwuLMZ3YTWjkiEvLdbE3mpsGg==}
+
   '@zag-js/store@1.24.2':
     resolution: {integrity: sha512-PZViq7LD4y+6iEB/0tvbqywoEccNXGy6jcOGIg5lwdY0CiPulPMeoLFi0+Etx1/Wom398NqlzecPqT4ZbICYMQ==}
 
   '@zag-js/types@1.24.2':
     resolution: {integrity: sha512-sXL8JHx8yrj8qGwCl/EhydaHoCCEfYwbg1rPWcCwqrpkvhic0KEZAJZMUhcU4dLdx+Oajbv2QeFz6Fk5U2Nn5A==}
+
+  '@zag-js/types@1.26.2':
+    resolution: {integrity: sha512-qPE6m47zxS5Ituakp4CrFKqN9lUE6O79kooJpTOvn5rneXYmZcM2Xu/M6uLfNjDmm7oACeoWJc5iMGAUnDG2Gg==}
 
   '@zag-js/utils@1.24.2':
     resolution: {integrity: sha512-3U8aYXjktpDmQV4M7nAOj7E4x1XSifG7PrbHqJbTYRm7/EPbwCQEEDPckkkWBmj4UrvltbkXPi6nzcP4Qpw5bA==}
@@ -3437,7 +3446,7 @@ snapshots:
   '@img/sharp-win32-x64@0.34.4':
     optional: true
 
-  '@inkeep/cxkit-react-oss@0.5.105(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@inkeep/agents-ui@0.14.14(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@ai-sdk/openai': 2.0.4(zod@4.1.11)
       '@ai-sdk/react': 2.0.5(react@19.1.0)(zod@4.1.11)
@@ -3470,6 +3479,7 @@ snapshots:
       '@zag-js/focus-trap': 1.24.2
       '@zag-js/presence': 1.24.2
       '@zag-js/react': 1.24.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@zag-js/remove-scroll': 1.26.2
       ai: 5.0.5(zod@4.1.11)
       altcha-lib: 1.3.0
       aria-hidden: 1.2.6
@@ -4456,6 +4466,10 @@ snapshots:
     dependencies:
       '@zag-js/types': 1.24.2
 
+  '@zag-js/dom-query@1.26.2':
+    dependencies:
+      '@zag-js/types': 1.26.2
+
   '@zag-js/focus-trap@1.24.2':
     dependencies:
       '@zag-js/dom-query': 1.24.2
@@ -4475,11 +4489,19 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
+  '@zag-js/remove-scroll@1.26.2':
+    dependencies:
+      '@zag-js/dom-query': 1.26.2
+
   '@zag-js/store@1.24.2':
     dependencies:
       proxy-compare: 3.0.1
 
   '@zag-js/types@1.24.2':
+    dependencies:
+      csstype: 3.1.3
+
+  '@zag-js/types@1.26.2':
     dependencies:
       csstype: 3.1.3
 
