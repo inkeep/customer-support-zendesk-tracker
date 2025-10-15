@@ -16,8 +16,8 @@ const Header = () => {
             className="object-contain"
             src="/images/logos/logo-with-text-black.svg"
             alt="Inkeep Logo"
-            width={300}
-            height={72}
+            width={150}
+            height={36}
           />
         </Link>
       </div>

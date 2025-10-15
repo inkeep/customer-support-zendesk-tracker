@@ -11,21 +11,21 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { setUser, name: currentName, email: currentEmail, clear } = useUser()
-  
+
   const isLoggedIn = Boolean(currentName && currentEmail)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (email.trim() && password.trim()) {
       setIsLoading(true)
-      
+
       // Simulate a brief loading state for better UX
       await new Promise(resolve => setTimeout(resolve, 800))
-      
+
       // Parse name from email (part before @) and format it
       const parsedName = email.split('@')[0]
       const formattedName = parsedName.charAt(0).toUpperCase() + parsedName.slice(1).toLowerCase()
-      
+
       setUser(formattedName, email.trim())
       router.push('/dashboard')
     }
@@ -62,17 +62,12 @@ export default function Login() {
   return (
     <div className="card animate-fade-in-scale max-w-md mx-auto p-8">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        </div>
-        <h2 className="text-2xl font-bold font-neue-haas" style={{ color: 'var(--color-foreground)' }}>Welcome Back</h2>
+        <h2 className="text-2xl font-normal font-neue-haas">Welcome Back</h2>
         <p className="text-sm mt-2 font-neue-haas" style={{ color: 'var(--color-muted)' }}>
           Sign in to access your personalized AI assistant
         </p>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="form-group">
           <label htmlFor="email" className="form-label">
@@ -89,7 +84,7 @@ export default function Login() {
             disabled={isLoading}
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="password" className="form-label">
             Password
@@ -105,11 +100,11 @@ export default function Login() {
             disabled={isLoading}
           />
         </div>
-        
+
         <Button
           type="submit"
           variant="primary"
-          className="w-full"
+          className="w-full flex items-center justify-center"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -122,7 +117,7 @@ export default function Login() {
           )}
         </Button>
       </form>
-      
+
       <div className="mt-6 text-center">
         <p className="text-xs font-neue-haas" style={{ color: 'var(--color-muted)' }}>
           Demo: Use your email and password to sign in
