@@ -112,10 +112,10 @@ const styleOverrides = `
 }
   `
 
-const agentUrl = process.env.NEXT_PUBLIC_INKEEP_GRAPH_URL || 'http://localhost:3003/api/chat'
+const agentUrl = process.env.NEXT_PUBLIC_INKEEP_AGENT_URL || 'http://localhost:3003/api/chat'
 const tenantId = process.env.NEXT_PUBLIC_INKEEP_TENANT_ID || 'inkeep'
 const projectId = process.env.NEXT_PUBLIC_INKEEP_PROJECT_ID || 'default'
-const agentId = process.env.NEXT_PUBLIC_INKEEP_GRAPH_ID || 'your-graph-id'
+const agentId = process.env.NEXT_PUBLIC_INKEEP_AGENT_ID || 'your-agent-id'
 
 export default function InkeepChat() {
   const [isOpen, setIsOpen] = useState(false)
