@@ -37,6 +37,10 @@ const styleOverrides = `
   box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #69A3FF !important;
 }
 
+.ikp-data-summary__details {
+  display: none;
+}
+
 @media (min-width: 600px) {
   .ikp-chat-bubble__root {
     width: 550px !important;

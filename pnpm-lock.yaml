@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@inkeep/agents-ui':
-        specifier: ^0.15.0
-        version: 0.15.0(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^0.15.1
+        version: 0.15.1(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -323,8 +323,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inkeep/agents-ui@0.15.0':
-    resolution: {integrity: sha512-zD27M6JR42gz0V04Cu2bV/oKa6ueMYg6YRQkvh3ADAHS0r/E61lSNCjCAXGMof/dlCD1t0ooBMyUkYOrpn5ClA==}
+  '@inkeep/agents-ui@0.15.1':
+    resolution: {integrity: sha512-SDULVVkXwDwwgpj9yE9sLgVEq9bXzwYiuUtnxPD5i1NYsdOgYi10Xy4INak6o5BZiBKld18aOvH3rnu2DJRA1Q==}
 
   '@isaacs/fs-minipass@4.0.1':
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
@@ -3446,7 +3446,7 @@ snapshots:
   '@img/sharp-win32-x64@0.34.4':
     optional: true
 
-  '@inkeep/agents-ui@0.15.0(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@inkeep/agents-ui@0.15.1(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@ai-sdk/openai': 2.0.4(zod@4.1.11)
       '@ai-sdk/react': 2.0.5(react@19.1.0)(zod@4.1.11)
