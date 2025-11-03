@@ -1,11 +1,9 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
-import { Sparkle, X } from 'lucide-react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { useUser } from '@/store/useUser'
 import {
   InkeepChatButton,
-  InkeepEmbeddedChat,
   type InkeepEmbeddedChatProps,
 } from '@inkeep/agents-ui'
 import OrderTrackingDisplay from './OrderTrackingDisplay'
@@ -38,6 +36,10 @@ const styleOverrides = `
   box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #69A3FF !important;
 }
 
+.ikp-data-summary__details {
+  display: none !important;
+}
+
 @media (min-width: 600px) {
   .ikp-chat-bubble__root {
     width: 550px !important;
@@ -64,6 +66,7 @@ export default function InkeepChat() {
   const [isInitialized, setIsInitialized] = useState(false)
   const [sessionId, setSessionId] = useState<string>('')
   const { name, email, hasHydrated } = useUser()
+  const chatFunctionsRef = useRef<any>(null)
 
   // Check if user is logged in
   const isLoggedIn = Boolean(name && email)
@@ -92,7 +95,7 @@ export default function InkeepChat() {
       "x-inkeep-tenant-id": tenantId,
       "x-inkeep-project-id": projectId,
       "x-inkeep-agent-id": agentId,
-      'x-emit-operations': 'true',
+      // 'x-emit-operations': 'true', // Commented out - status updates work without this
 
       // Request context headers for personalization
       // These will be available in your graph as requestContext.user_name and requestContext.user_email
@@ -104,13 +107,24 @@ export default function InkeepChat() {
       "initialization_timestamp": Date.now().toString(),
     };
 
+    // Create a wrapper for OrderTrackingDisplay with access to chat functions
+    const OrderTrackingDisplayWrapper = (props: any) => {
+      const handleOrderClick = (orderId: string) => {
+        if (chatFunctionsRef.current?.submitMessage) {
+          chatFunctionsRef.current.submitMessage(`${orderId}`)
+        }
+      }
+      return <OrderTrackingDisplay {...props} onOrderClick={handleOrderClick} />
+    }
+
     return {
       agentUrl,
       headers,
+      chatFunctionsRef,
       aiAssistantAvatar: "/images/logos/square-outline-logo-black.png",
       // Example questions (better than quickQuestions)
       exampleQuestions: [
-        'How can I track my order?',
+        'Show me my recent orders',
         'What is your return policy?',
         'How do I contact support?'
       ],
@@ -118,9 +132,10 @@ export default function InkeepChat() {
       introMessage: `Hi ${name}! 👋 I'm here to help you with any questions about your orders, returns, or our services. Your session is now connected and personalized. What can I help you with today?`,
 
       // Data components registration
+      // Component names must match the 'name' field in the data component definition
       components: {
-        OrderTrackingDisplay,
-        SupportTicketCard
+        OrderTrackingDisplay: OrderTrackingDisplayWrapper,
+        SupportTicketCard,
       },
 
       // Help options for better UX
@@ -134,15 +149,6 @@ export default function InkeepChat() {
             url: "mailto:support@example.com?subject=Customer%20Support%20Request",
           },
         },
-        {
-          name: "Track Order",
-          isPinnedToToolbar: true,
-          icon: { builtIn: "LuPackage" },
-          action: {
-            type: "open_link",
-            url: "/track-order",
-          },
-        },
       ],
 
       // Enable sharing
@@ -152,7 +158,7 @@ export default function InkeepChat() {
       // Link behavior
       shouldOpenLinksInNewTab: true,
     }
-  }, [name, email, isLoggedIn, isInitialized, sessionId])
+  }, [name, email, isLoggedIn, isInitialized, sessionId, chatFunctionsRef])
 
   // Don't render until store has hydrated from localStorage
   if (!hasHydrated) {
@@ -173,7 +179,6 @@ export default function InkeepChat() {
           name,
           email,
         },
-        apiKey: process.env.NEXT_PUBLIC_INKEEP_API_KEY || 'demo-key',
         primaryBrandColor: '#3784ff',
         organizationDisplayName: 'Customer Support Demo',
         colorMode: { forcedColorMode: "light" },

@@ -11,11 +11,18 @@ interface OrderTrackingDisplayProps {
     primaryAddress: string
     lastUpdated: string
   }
+  onOrderClick?: (orderId: string) => void
 }
 
-export default function OrderTrackingDisplay({ order }: OrderTrackingDisplayProps) {
+export default function OrderTrackingDisplay({ order, onOrderClick }: OrderTrackingDisplayProps) {
   // Debug logging to verify component is being called
   console.log('🎯 OrderTrackingDisplay rendered with order:', order)
+
+  const handleClick = () => {
+    if (onOrderClick) {
+      onOrderClick(order.id)
+    }
+  }
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -49,7 +56,20 @@ export default function OrderTrackingDisplay({ order }: OrderTrackingDisplayProp
 
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm max-w-md mx-auto my-2">
+    <div
+      onClick={handleClick}
+      className={`bg-white border border-gray-200 rounded-lg p-4 shadow-sm max-w-md mx-auto my-2 transition-all duration-200 ${
+        onOrderClick ? 'cursor-pointer hover:shadow-md hover:border-blue-300 hover:bg-blue-50/30' : ''
+      }`}
+      role={onOrderClick ? 'button' : undefined}
+      tabIndex={onOrderClick ? 0 : undefined}
+      onKeyDown={onOrderClick ? (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleClick()
+        }
+      } : undefined}
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2 flex-1">
@@ -83,6 +103,9 @@ export default function OrderTrackingDisplay({ order }: OrderTrackingDisplayProp
           </div>
         </div>
       </div>
+
+      {/* Click hint */}
+      {onOrderClick}
     </div>
   )
 }

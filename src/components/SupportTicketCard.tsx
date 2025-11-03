@@ -117,17 +117,6 @@ export default function SupportTicketCard({ ticket }: SupportTicketCardProps) {
           </div>
         )}
       </div>
-
-      {/* Action Footer */}
-      <div className="border-t border-gray-100 pt-3 mt-4">
-        <div className="flex items-center justify-between text-xs text-gray-500">
-          <span>Ticket Details</span>
-          <div className="flex items-center gap-1">
-            <span>View Full History</span>
-            <ArrowRight className="w-3 h-3" />
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
