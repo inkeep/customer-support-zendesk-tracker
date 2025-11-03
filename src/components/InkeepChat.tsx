@@ -8,7 +8,6 @@ import {
 } from '@inkeep/agents-ui'
 import OrderTrackingDisplay from './OrderTrackingDisplay'
 import SupportTicketCard from './SupportTicketCard'
-import ToolUsageStatus from './ToolUsageStatus'
 
 const styleOverrides = `
  .ikp-chat-button__button {
@@ -38,7 +37,7 @@ const styleOverrides = `
 }
 
 .ikp-data-summary__details {
-  display: none;
+  display: none !important;
 }
 
 @media (min-width: 600px) {
@@ -137,7 +136,6 @@ export default function InkeepChat() {
       components: {
         OrderTrackingDisplay: OrderTrackingDisplayWrapper,
         SupportTicketCard,
-        ToolUsageStatus, // Matches name: 'ToolUsageStatus' in tool-usage-status.ts
       },
 
       // Help options for better UX
