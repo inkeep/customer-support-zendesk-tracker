@@ -54,7 +54,7 @@ const Footer = () => {
             {/* Copyright */}
             <div className="text-center md:text-right">
               <p className="font-neue-haas text-sm" style={{ color: 'var(--color-muted)' }}>
-                © 2024 Inkeep. All rights reserved.
+                © 2025 Inkeep. All rights reserved.
               </p>
             </div>
           </div>
